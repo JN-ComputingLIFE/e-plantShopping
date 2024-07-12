@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import './ProductList.css'
+import {addList} from './CreatSlice.jsx';
 function ProductList() {
   
     const plantsArray = [
@@ -229,6 +229,8 @@ function ProductList() {
     fontSize: '30px',
     textDecoration: 'none',
    }
+   const [addedToCart, setAddedToCart] = useState({});
+   
     return (
         <div>
              <div className="navbar" style={styleObj}>
@@ -251,8 +253,21 @@ function ProductList() {
         </div>
 
         <div className="product-grid">
-
-
+        {plantsArray.map((category, index) => (
+  <div key={index}>
+    <h1><div>{category.category}</div></h1>
+    <div className="product-list">
+      {category.plants.map((plant, plantIndex) => (
+        <div className="product-card" key={plantIndex}>
+          <img className="product-image" src={plant.image} alt={plant.name} />
+         <div className="product-title">{plant.name}</div>
+/*Similarly like the above plant.name show other details like description and cost*/
+         <button  onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+        </div>
+      ))}
+    </div>
+  </div>
+))}
         </div>
 
     </div>
